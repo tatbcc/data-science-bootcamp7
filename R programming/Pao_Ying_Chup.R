@@ -1,3 +1,7 @@
+# Pao function is a Rock, Paper, Scissors agains a computer 
+# the game will relunch itselves until the player input "n"
+# then there will be a score board regarding total rounds, total wins/ losses/ ties
+
 Pao <- function(){
 #Create score_board
 score_board <- data.frame(matrix(data="",ncol=3,nrow=1))
