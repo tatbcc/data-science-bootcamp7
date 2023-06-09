@@ -18,4 +18,4 @@ I am currently importing all of my coding projects into this Github
 
 Badge: 
 
-PS. P'toy if you are reading this I am currently doing the homeworks as you are reading this message.
+PS: P'Toy if you are reading this I am currently doing the homeworks as you are reading this message.
