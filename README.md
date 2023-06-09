@@ -17,3 +17,4 @@ I am currently importing all of my coding projects into this Github
 -> https://www.notion.so/HW-Profile-ce580bbe49144846bce8fdcdb0adda5e
 
 Badge: 
+PS. P'toy if you are reading this I am currently doing the homeworks as you are reading this message.
