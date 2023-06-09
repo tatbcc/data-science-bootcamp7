@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/kittitat_t/SQLite path/HW2.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="679"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainBaseMenus"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">DROP TABLE BaseMenus;
+CREATE TABLE IF NOT EXISTS BaseMenus(
+  BaseNum int,
+  BaseName text,
+  BasePrice int
+);
+
+INSERT INTO BaseMenus VALUES
+  (1,'Pad Kra Pao',40),
+  (2,'Pad Thai',45),
+  (3,'Khai Jiao',30),
+  (4,'Kao Pad',45);
+
+DROP TABLE Ingredients;
+CREATE TABLE IF NOT EXISTS Ingredients(
+  IngredientNum int,
+  IngredientName text,
+  IngredientPrice int
+);
+
+INSERT INTO Ingredients VALUES
+  (1,'Pork',25),
+  (2,'Chicken',25),
+  (3,'Meat',35),
+  (4,'Seafood',40),
+  (5,'Vegetarian',20);
+
+ DROP TABLE Beverages;
+CREATE TABLE IF NOT EXISTS Beverages(
+  BeverageNum int,
+  BeverageName text,
+  BeveragePrice int
+);
+
+INSERT INTO Beverages VALUES
+  (0,'None',0),
+  (1,'Water',7),
+  (2,'Soda',15),
+  (3,'EnergyDrink',35);
+
+  DROP TABLE Payments;
+CREATE TABLE IF NOT EXISTS Payments(
+  PaymentNum int,
+  PaymentName text
+);
+
+INSERT INTO Payments VALUES
+  (1,'QR code'),
+  (2,'Cash'),
+  (3,'Cards');
+
+DROP TABLE CustomerOrders;
+CREATE TABLE IF NOT EXISTS CustomerOrders(
+  OrderNum int,
+  CustomerName text,
+  BaseNum int,
+  IngredientNum int,
+  BeverageNum int,
+  PaymentNum int
+);
+
+INSERT INTO CustomerOrders VALUES
+  (1,'Adam',1,1,1,3),
+  (2,'Adam',2,1,2,3),
+  (3,'Adam',4,5,3,3),
+  (4,'Anna',3,3,0,2),
+  (5,'Anna',1,5,2,2),
+  (6,'Josh',1,5,2,1),
+  (7,'David',1,4,3,1),
+  (8,'David',4,2,1,1),
+  (9,'Andrew',1,2,0,3),
+  (10,'Marie',1,5,1,2),
+  (11,'Bruse',3,1,3,2);
+
+WITH OrderMatching AS ( 
+SELECT
+  OrderNum,
+  CustomerName,
+  BaseName,
+  IngredientName,
+  BaseName || ' ' || IngredientName || ' Wtih ' || BeverageName AS RealOrder,
+  BasePrice + IngredientPrice + BeveragePrice AS TotalPrice,
+  BeverageName,
+  PaymentName
+FROM CustomerOrders
+JOIN BaseMenus
+ON BaseMenus.BaseNum = CustomerOrders.BaseNum
+JOIN Ingredients
+ON Ingredients.IngredientNum = CustomerOrders.IngredientNum
+JOIN Beverages
+ON Beverages.BeverageNum = CustomerOrders.BeverageNum
+JOIN Payments
+ON Payments.paymentNum = CustomerOrders.paymentNum 
+)
+-- Query1: Price Per Transaction
+/*SELECT
+  OrderNum,
+  RealOrder,
+  TotalPrice
+From OrderMatching; */
+
+-- Query2: Aggregate Price Per Person
+SELECT 
+  Customername, 
+  SUM(TotalPrice) AS Total_Price,
+  count(*) AS Total_order,
+  PaymentName AS Paid_With
+FROM OrderMatching
+GROUP BY Customername;
+
+-- Query3: Check the most popular menu
+/*SELECT 
+  BaseName,
+  count(*) AS Total_order
+FROM OrderMatching
+GROUP BY BaseName
+ORDER BY 2 DESC;*/
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
