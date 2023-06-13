@@ -16,6 +16,6 @@ I am currently importing all of my coding projects into this Github
 
 -> https://www.notion.so/HW-Profile-ce580bbe49144846bce8fdcdb0adda5e
 
-Badge: 
+Badge: https://badgr.com/public/assertions/OZJrxab1TkiA_LqAsRS91Q
 
 PS: P'Toy if you are reading this I am currently doing the homeworks as you are reading this message.
